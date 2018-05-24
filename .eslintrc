@@ -1,12 +1,13 @@
 {
-  "plugins": ["node"],
-  "extends": ["eslint:recommended", "plugin:node/recommended"],
-  "env": {
-    "node": true,
-    "es6": true
-  },
-  "rules": {
-    "comma-dangle": 0,
-    "no-console": 1
-  }
+	"plugins": ["node", "prettier"],
+	"extends": ["eslint:recommended", "plugin:node/recommended"],
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"rules": {
+		"indent": ["error", "tab"],
+		"comma-dangle": 0,
+		"no-console": 1
+	}
 }
