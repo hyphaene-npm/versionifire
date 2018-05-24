@@ -1,33 +1,70 @@
 #!/usr/bin/env node
 const fs = require('fs');
 
-const acceptedArgs = ['patch', 'minor', 'help', 'major', 'version'];
+const {
+	ACCEPTED_ARGS,
+	WRONG_ARGS_NUMBER,
+	UNAVAILABLE_COMMAND,
+	FORMAT,
+	PACKAGE_PATH,
+	PATCH,
+	MAJOR,
+	MINOR,
+	VERSION,
+	HELP
+} = require('./constants');
 
-fs.readFile('./package.json', 'utf8', (err, data) => {
+const { printVersion, printHelp, increase } = require('./utils');
+
+fs.readFile(PACKAGE_PATH, FORMAT, (err, data) => {
 	const args = process.argv.slice(2);
 	const [arg] = args;
+
 	if (err) {
 		console.log(err);
-		throw new Error('oops');
-	} else if (args.length > 1) {
-		throw new Error(`This CLI accepts only one arg. please run :
-    $ versionifier help
-to see the available commands`);
-	} else if (!acceptedArgs.includes(arg)) {
-		throw new Error(`command not available
-    $ versionifier help
-to see the available commands`);
+		process.exit(1);
+	} else if (args.length > 1 || !arg) {
+		console.log(WRONG_ARGS_NUMBER);
+		process.exit(1);
+	} else if (!ACCEPTED_ARGS.includes(arg)) {
+		console.log(UNAVAILABLE_COMMAND);
+		process.exit(1);
 	} else {
 		const package = JSON.parse(data); //now it an object
 		const { version } = package;
-		// test //
-		package.yolo = 'yolooooo';
-		const [major, minor, patch] = version.split('.');
-		console.log({ major, minor, patch });
+		let needExit = false;
+		let [major, minor, patch] = version.split('.');
+		switch (arg) {
+		case PATCH:
+			patch = increase(patch);
+			break;
+		case MINOR:
+			minor = increase(minor);
+			patch = 0;
+			break;
+		case MAJOR:
+			major = increase(major);
+			minor = 0;
+			patch = 0;
+			break;
+		case VERSION:
+			printVersion(version);
+			needExit = true;
+			break;
+		case HELP:
+			needExit = true;
+			printHelp();
+			break;
+		}
+		if (needExit) {
+			process.exit(0);
+		}
 
-		const json = JSON.stringify(package); //convert it back to json
+		const updatedVersion = [major, minor, patch].join('.');
+		package.version = updatedVersion;
+		const json = JSON.stringify(package, null, 4);
 		fs.writeFile('package.json', json, 'utf8', () => {
-			console.log('Job is done :)');
-		}); // write it back
+			console.log('Job is doooone :)');
+		});
 	}
 });
