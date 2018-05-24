@@ -82,7 +82,7 @@ v3: use of `commander` or `command-lin-args`
 
 Out of scopes :
 
-*   [] check if code works on node 4,5,6 etc
+*   [ ] check if code works on node 4,5,6 etc
 *   [ ] handle compatibility
 
 ## Ressources
