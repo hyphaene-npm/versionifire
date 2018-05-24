@@ -6,6 +6,8 @@ This CLI solves this issue.
 
 ## Install
 
+### globally
+
 First, install it globally :
 
 ```bash
@@ -20,15 +22,37 @@ npm install -g versionifier
 
 (those might need `sudo` to work)
 
+### locally
+
+```bash
+yarn add -D versionifier
+```
+
+or
+
+```bash
+npm install --save-dev versionifier
+```
+
 ## Usage
 
 Here are the commands :
 
-*   versionifier version : output the version
-*   versionifier help : output the available commands
-*   versionifier patch : increase by 1 the patch version of your current package.json
-*   versionifier minor : increase by 1 the minor version of your current package.json
-*   versionifier major : increase by 1 the major version of your current package.json
+```bash
+$ versionifier version # output the version
+$ versionifier help # output the available commands
+$ versionifier patch # increase by 1 the patch version of your current package.json
+$ versionifier minor # increase by 1 the minor version of your current package.json
+$ versionifier major # increase by 1 the major version of your current package.json
+```
+
+if the CLi is installed locally, here are some scripts to add inside the package.json :
+
+```
+"up:patch": "versionifier patch",
+"up:minor": "versionifier minor",
+"up:major": "versionifier major",
+```
 
 ### Roadmap
 
