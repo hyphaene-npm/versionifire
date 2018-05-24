@@ -32,6 +32,11 @@ Here are the commands :
 
 ### Roadmap
 
+options :
+
+commitWhenOnlyFileInStage: true
+commitWhenOnlyFileInStage: false
+
 v1:
 
 *   [ ] just handles the <"cwd">/package.json and no git command
@@ -58,6 +63,7 @@ Out of scopes :
 ## Ressources
 
 *   https://blog.risingstack.com/mastering-the-node-js-cli-command-line-options/
+*   https://stackoverflow.com/questions/12941083/get-the-output-of-a-shell-command-in-node-js
 
 ### command-line-args
 
