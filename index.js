@@ -17,6 +17,6 @@ fs.readFile('./package.json', 'utf8', function readFileCallback(err, data) {
     const [major, minor, patch] = version.split('.');
     console.log({ major, minor, patch });
     const json = JSON.stringify(package); //convert it back to json
-    fs.writeFile('myjsonfile.json', json, 'utf8'); // write it back
+    fs.writeFile('package.json', json, 'utf8'); // write it back
   }
 });
