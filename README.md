@@ -60,14 +60,15 @@ options :
 
 commitWhenOnlyFileInStage: true
 commitWhenOnlyFileInStage: false
+customMessageForCommit: 'update version package to $VERSION'
 
 v1:
 
-*   [ ] just handles the <"cwd">/package.json and no git command
+*   [ ] just handles the <"cwd">/package.json
+*   [ ] handle git commands through .versionifierrc
 
 v2:
 
-*   [ ] handle git commands through .versionifierrc or package.json
 *   [ ] parse .versionifierrc at : current location / user root by default
 *   [ ] parse package.json "versionifier" key
 *   [ ] .versionifierrc options : commit= false
