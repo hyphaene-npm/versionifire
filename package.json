@@ -1,36 +1,38 @@
 {
-    "name": "versionifier",
-    "version": "1.0.2",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "homepage": "https://github.com/hyphaene/versionifier#readme",
-    "bugs": {
-        "url": "https://github.com/hyphaene/versionifier/issues"
-    },
-    "bin": {
-        "versionifier": "index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/hyphaene/versionifier.git"
-    },
-    "author": "Maximilien Garenne <maximilien.garenne@gmail.com>",
-    "license": "MIT",
-    "devDependencies": {
-        "eslint": "^4.19.1",
-        "eslint-plugin-prettier": "^2.6.0"
-    },
-    "dependencies": {
-        "command-line-args": "^5.0.2",
-        "commander": "^2.15.1",
-        "execa": "^0.10.0",
-        "fs": "^0.0.1-security",
-        "path": "^0.12.7"
-    },
-    "engines": {
-        "node": ">=8.0.0"
-    }
+	"name": "versionifier",
+	"version": "1.0.2",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"homepage": "https://github.com/hyphaene/versionifier#readme",
+	"bugs": {
+		"url": "https://github.com/hyphaene/versionifier/issues"
+	},
+	"bin": {
+		"versionifier": "index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hyphaene/versionifier.git"
+	},
+	"author": "Maximilien Garenne <maximilien.garenne@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"eslint": "^4.19.1",
+		"eslint-plugin-prettier": "^2.6.0"
+	},
+	"dependencies": {
+		"fs": "^0.0.1-security",
+		"path": "^0.12.7"
+	},
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"keywords": [
+		"npm",
+		"package version",
+		"update"
+	]
 }
