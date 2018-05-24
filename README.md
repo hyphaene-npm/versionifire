@@ -50,6 +50,11 @@ v3: use of `commander` or `command-lin-args`
 *   [ ] set config via cli ( versionifier set-config -g? || (-c + path/to/configFile)? + key=value)
 *   [ ] get config via cli ( versionifier set-config -g? || (-c + path/to/configFile)? )
 
+Out of scopes :
+
+*   [] check if code works on node 4,5,6 etc
+*   [ ] handle compatibility
+
 ## Ressources
 
 *   https://blog.risingstack.com/mastering-the-node-js-cli-command-line-options/
