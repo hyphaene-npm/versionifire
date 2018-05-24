@@ -1,4 +1,4 @@
-/!\ dev mode /!\ => available at 1.0.0
+## Goal
 
 Hi there !
 Tired to manually update your package.json to increase your version number ?
