@@ -46,13 +46,27 @@ $ versionifier minor # increase by 1 the minor version of your current package.j
 $ versionifier major # increase by 1 the major version of your current package.json
 ```
 
-if the CLi is installed locally, here are some scripts to add inside the package.json :
+Here are some scripts you can add inside the package.json :
 
 ```
 "up:patch": "versionifier patch",
 "up:minor": "versionifier minor",
 "up:major": "versionifier major",
 ```
+
+(then run)
+
+```bash
+yarn up:patch
+```
+
+or
+
+```bash
+npm run up:patch
+```
+
+for example
 
 [//]: # 'dans les settings js :"/.versionifierrc": "json"'
 
