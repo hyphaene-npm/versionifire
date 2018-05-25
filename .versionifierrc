@@ -1,0 +1,5 @@
+{
+	"commitIfOnlyPackageJsonInStage":false,
+	"commitIfMultplileFilesInStage":false,
+	"push":false
+}

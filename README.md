@@ -54,6 +54,8 @@ if the CLi is installed locally, here are some scripts to add inside the package
 "up:major": "versionifier major",
 ```
 
+[//]: # 'dans les settings js :"/.versionifierrc": "json"'
+
 ### Roadmap
 
 options :
