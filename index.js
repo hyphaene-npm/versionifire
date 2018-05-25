@@ -11,12 +11,13 @@ const {
 	MAJOR,
 	MINOR,
 	VERSION,
-	HELP
+	HELP,
+	DEFAULT
 } = require('./constants');
 
 const { printVersion, printHelp, increase } = require('./utils');
 
-fs.readFile(PACKAGE_PATH, FORMAT, (err, data) => {
+fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
 	const [arg] = args;
 
@@ -31,9 +32,14 @@ fs.readFile(PACKAGE_PATH, FORMAT, (err, data) => {
 		process.exit(1);
 	} else {
 		const package = JSON.parse(data); //now it an object
-		const { version } = package;
+		const { version, versionifier } = package;
 		let needExit = false;
 		let [major, minor, patch] = version.split('.');
+
+		const { commitIfOnlyPackageJsonInStage, commitIfMultplileFilesInStage, push } =
+			versionifier || DEFAULT;
+		const taa = await test();
+		console.log('taa', taa);
 		switch (arg) {
 		case PATCH:
 			patch = increase(patch);
