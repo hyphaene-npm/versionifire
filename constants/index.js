@@ -25,6 +25,12 @@ const AVAILABLE_COMMANDS = [PATCH, MINOR, MAJOR]
 
 const PACKAGE_PATH = './package.json';
 
+const DEFAULT = {
+	commitIfOnlyPackageJsonInStage: false,
+	commitIfMultplileFilesInStage: false,
+	push: false
+};
+
 module.exports = {
 	ACCEPTED_ARGS,
 	WRONG_ARGS_NUMBER,
@@ -36,5 +42,6 @@ module.exports = {
 	MAJOR,
 	VERSION,
 	HELP,
-	AVAILABLE_COMMANDS
+	AVAILABLE_COMMANDS,
+	DEFAULT
 };
