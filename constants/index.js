@@ -28,7 +28,8 @@ const PACKAGE_PATH = './package.json';
 const DEFAULT = {
 	commitIfOnlyPackageJsonInStage: false,
 	commitIfMultplileFilesInStage: false,
-	push: false
+	push: false,
+	commitMessage: 'Updated package.json to version @@'
 };
 
 module.exports = {
