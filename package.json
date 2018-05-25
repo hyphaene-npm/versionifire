@@ -35,6 +35,7 @@
 	"versionifier": {
 		"commitIfOnlyPackageJsonInStage": false,
 		"commitIfMultplileFilesInStage": false,
-		"push": false
+		"push": false,
+		"commitMessage": "Update package.json to version @@ "
 	}
 }
