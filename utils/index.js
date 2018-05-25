@@ -8,9 +8,11 @@ const printVersion = version => {
 };
 
 const increase = partialVersion => parseInt(partialVersion) + 1;
+const getCommitMessage = (message, version) => message.replace('@@', version);
 
 module.exports = {
 	printHelp,
 	printVersion,
-	increase
+	increase,
+	getCommitMessage
 };

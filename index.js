@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const execa = require('execa');
 
 const {
 	ACCEPTED_ARGS,
@@ -15,7 +16,7 @@ const {
 	DEFAULT
 } = require('./constants');
 
-const { printVersion, printHelp, increase } = require('./utils');
+const { printVersion, printHelp, increase, getCommitMessage } = require('./utils');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -36,10 +37,38 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		let needExit = false;
 		let [major, minor, patch] = version.split('.');
 
-		const { commitIfOnlyPackageJsonInStage, commitIfMultplileFilesInStage, push } =
+		const {
+			commitIfOnlyPackageJsonInStage,
+			commitIfMultplileFilesInStage,
+			push,
+			commitMessage
+		} =
 			versionifier || DEFAULT;
-		const taa = await test();
-		console.log('taa', taa);
+
+		const { stdout } = await execa.shell('git diff --name-only --cached');
+		console.log('result', typeof stdout, stdout, stdout.split('\n'));
+
+		if (
+			(stdout && commitIfMultplileFilesInStage) ||
+			(!stdout && commitIfOnlyPackageJsonInStage)
+		) {
+			const isGitInitialized = await execa.shell('git rev-parse --is-inside-git-dir');
+			if (!isGitInitialized) {
+				await execa.shell('git init');
+			}
+			await execa.shell('git add package.json');
+			await execa.shell(`git commit -m "${getCommitMessage(commitMessage, version)}"`);
+		}
+		if (push) {
+			await execa.shell('git push origin `git rev-parse --abbrev-ref HEAD`');
+		}
+
+		// si vide et commitSingle =>
+
+		// si pas vide mais commitMultiple
+
+		// si push => push
+
 		switch (arg) {
 		case PATCH:
 			patch = increase(patch);
