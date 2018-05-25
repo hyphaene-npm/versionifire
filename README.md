@@ -74,10 +74,10 @@ for example
 
 options :
 
-commitWhenOnlyFileInStage: false
-commitWhenOnlyFileInStage: false
-customMessageForCommit: 'update version package to $VERSION'
-push : false
+*   commitWhenOnlyFileInStage: false
+*   commitWhenOnlyFileInStage: false
+*   commitMessage: 'update version package to $VERSION'
+*   push : false
 
 v1:
 
