@@ -27,7 +27,7 @@ const PACKAGE_PATH = './package.json';
 
 const DEFAULT = {
 	commitIfOnlyPackageJsonInStage: false,
-	commitIfMultplileFilesInStage: false,
+	commitIfMultipleFilesInStage: false,
 	push: false,
 	commitMessage: 'Updated package.json to version @@'
 };
