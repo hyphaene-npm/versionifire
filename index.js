@@ -16,7 +16,7 @@ const {
 	DEFAULT
 } = require('./constants');
 
-const { printVersion, printHelp, increase, getCommitMessage } = require('./utils');
+const { printVersion, printHelp, increase, getCommitMessage,oraPush, oraAdd, oraCommit, oraInit } = require('./utils');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -38,8 +38,8 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		let [major, minor, patch] = version.split('.');
 
 		const {
-			commitIfOnlyPackageJsonInStage,
-			commitIfMultplileFilesInStage,
+			commitIfOnlyPackageJsonInStage || commitIfMultipleFilesInStage),
+			commitIfMultipleFilesInStage,
 			push,
 			commitMessage
 		} =
@@ -49,8 +49,8 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		console.log('result', typeof stdout, stdout, stdout.split('\n'));
 
 		if (
-			(stdout && commitIfMultplileFilesInStage) ||
-			(!stdout && commitIfOnlyPackageJsonInStage)
+			(stdout && commitIfMultipleFilesInStage) ||
+			(!stdout && (commitIfOnlyPackageJsonInStage || commitIfMultipleFilesInStage))
 		) {
 			const isGitInitialized = await execa.shell('git rev-parse --is-inside-git-dir');
 			if (!isGitInitialized) {
