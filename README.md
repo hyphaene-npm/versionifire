@@ -58,9 +58,10 @@ if the CLi is installed locally, here are some scripts to add inside the package
 
 options :
 
-commitWhenOnlyFileInStage: true
+commitWhenOnlyFileInStage: false
 commitWhenOnlyFileInStage: false
 customMessageForCommit: 'update version package to $VERSION'
+push : false
 
 v1:
 
@@ -69,16 +70,7 @@ v1:
 
 v2:
 
-*   [ ] parse .versionifierrc at : current location / user root by default
-*   [ ] parse package.json "versionifier" key
-*   [ ] .versionifierrc options : commit= false
-
-v3: use of `commander` or `command-lin-args`
-
-*   [ ] parse another arg to indicate the path of the package.json which would be processed : -p='../path/to/file ( both relative and absolute paths)
-*   [ ] parse another arg to indicate the path of the package.json which would be processed : -c='../path/to/config
-*   [ ] set config via cli ( versionifier set-config -g? || (-c + path/to/configFile)? + key=value)
-*   [ ] get config via cli ( versionifier set-config -g? || (-c + path/to/configFile)? )
+*   [ ] use a prepublishOnly script
 
 Out of scopes :
 
