@@ -26,6 +26,7 @@
 	"dependencies": {
 		"execa": "^0.10.0",
 		"fs": "^0.0.1-security",
+		"ora": "^2.1.0",
 		"path": "^0.12.7"
 	},
 	"engines": {
@@ -34,7 +35,7 @@
 	"keywords": ["npm", "package version", "update", "git", "commit", "push"],
 	"versionifier": {
 		"commitIfOnlyPackageJsonInStage": false,
-		"commitIfMultplileFilesInStage": false,
+		"commitIfMultipleFilesInStage": false,
 		"push": false,
 		"commitMessage": "Update package.json to version @@ "
 	}
