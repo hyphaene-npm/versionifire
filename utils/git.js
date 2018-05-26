@@ -24,13 +24,16 @@ const commit = async (commitMessage, version) => {
 const add = async () => {
 	execa.shell('git add ./package.json');
 };
+const publish = async () => {
+	execa.shell('git add ./package.json');
+};
 
-const pushToCurrentBranch = async (repo = 'origin') =>
-	execa.shell(`git push ${repo} "$(git rev-parse --abbrev-ref HEAD)"`);
+const pushToCurrentBranch = async (remoteRepo = 'origin') =>
+	execa.shell(`git push ${remoteRepo} "$(git rev-parse --abbrev-ref HEAD)"`);
 
 const oraInit = async () => {
 	const promise = initGit();
-	ora.promise(promise, getSpinner(`init`));
+	ora.promise(promise, getSpinner(`initializing git repository`));
 	await promise;
 };
 
@@ -46,9 +49,14 @@ const oraCommit = async (commitMessage, version) => {
 	await promise;
 };
 
-const oraPush = async () => {
-	const promise = pushToCurrentBranch();
-	ora.promise(promise, getSpinner(`push`));
+const oraPush = async remoteRepo => {
+	const promise = pushToCurrentBranch(remoteRepo);
+	ora.promise(promise, getSpinner(`pushing on ${remoteRepo}`));
+	await promise;
+};
+const oraPublish = async () => {
+	const promise = publish();
+	ora.promise(promise, getSpinner(`running npm publish`));
 	await promise;
 };
 
@@ -57,5 +65,6 @@ module.exports = {
 	initGit: oraInit,
 	add: oraAdd,
 	commit: oraCommit,
-	pushToCurrentBranch: oraPush
+	pushToCurrentBranch: oraPush,
+	runPublish: oraPublish
 };
