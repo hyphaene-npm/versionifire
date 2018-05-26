@@ -38,6 +38,7 @@
 		"commitIfMultipleFilesInStage": true,
 		"push": true,
 		"commitMessage": "Update package.json to version @@",
-		"publish": true
+		"publish": true,
+		"remoteRepo": "origin"
 	}
 }

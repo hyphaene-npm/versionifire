@@ -47,15 +47,12 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		let needExit = false;
 		let [major, minor, patch] = version.split('.');
 
-		const {
-			commitIfOnlyPackageJsonInStage,
-			commitIfMultipleFilesInStage,
-			push,
-			commitMessage,
-			remoteRepo,
-			publish
-		} =
-			versionifier || DEFAULT;
+		const { commitIfOnlyPackageJsonInStage } = versionifier || DEFAULT;
+		const { commitIfMultipleFilesInStage } = versionifier || DEFAULT;
+		const { push } = versionifier || DEFAULT;
+		const { commitMessage } = versionifier || DEFAULT;
+		const { remoteRepo } = versionifier || DEFAULT;
+		const { publish } = versionifier || DEFAULT;
 
 		switch (arg) {
 		case PATCH:
