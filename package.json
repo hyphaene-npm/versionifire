@@ -34,9 +34,10 @@
 	},
 	"keywords": ["npm", "package version", "update", "git", "commit", "push"],
 	"versionifier": {
-		"commitIfOnlyPackageJsonInStage": false,
-		"commitIfMultipleFilesInStage": false,
-		"push": false,
-		"commitMessage": "Update package.json to version @@"
+		"commitIfOnlyPackageJsonInStage": true,
+		"commitIfMultipleFilesInStage": true,
+		"push": true,
+		"commitMessage": "Update package.json to version @@",
+		"publish": true
 	}
 }
