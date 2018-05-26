@@ -1,3 +1,5 @@
+const path = require('path');
+
 const ACCEPTED_ARGS = ['patch', 'minor', 'help', 'major', 'version'];
 
 const WRONG_ARGS_NUMBER = `This CLI accepts only one arg. please run :
@@ -24,12 +26,15 @@ const AVAILABLE_COMMANDS = [PATCH, MINOR, MAJOR]
 	.reduce((acc, current) => acc + `\n${current}\n`, VERSION_COMMAND);
 
 const PACKAGE_PATH = './package.json';
+const PACKAGE_FULL_PATH = path.join(process.cwd(), PACKAGE_PATH);
 
 const DEFAULT = {
 	commitIfOnlyPackageJsonInStage: false,
 	commitIfMultipleFilesInStage: false,
 	push: false,
-	commitMessage: 'Updated package.json to version @@'
+	commitMessage: 'Updated package.json to version @@',
+	remoteRepo: 'origin',
+	publish: false
 };
 
 module.exports = {
@@ -44,5 +49,6 @@ module.exports = {
 	VERSION,
 	HELP,
 	AVAILABLE_COMMANDS,
-	DEFAULT
+	DEFAULT,
+	PACKAGE_FULL_PATH
 };
