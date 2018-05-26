@@ -76,8 +76,13 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			printHelp();
 			break;
 		}
+		if (needExit) {
+			return;
+		}
 		const updatedVersion = [major, minor, patch].join('.');
-
+		package.version = updatedVersion;
+		const json = JSON.stringify(package, null, 4);
+		fs.writeFileSync(PACKAGE_FULL_PATH, json, FORMAT);
 		const isGitInitialized = await getIsGitInitialized();
 		if (!isGitInitialized) {
 			await initGit();
@@ -94,17 +99,10 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			await pushToCurrentBranch(remoteRepo);
 		}
 
-		if (needExit) {
-			return;
-		}
-		package.version = updatedVersion;
-		const json = JSON.stringify(package, null, 4);
-		fs.writeFileSync(PACKAGE_FULL_PATH, json, FORMAT);
-		console.log(`Job is doooone :), package is at version : ${updatedVersion}`);
-
 		if (publish) {
 			await runPublish();
 		}
+		console.log(`Job is doooone :), package is at version : ${updatedVersion}`);
 		return;
 	}
 });
