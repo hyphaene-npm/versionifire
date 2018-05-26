@@ -25,7 +25,7 @@ const add = async () => {
 	execa.shell('git add ./package.json');
 };
 const publish = async () => {
-	execa.shell('git add ./package.json');
+	execa.shell('npm publish');
 };
 
 const pushToCurrentBranch = async (remoteRepo = 'origin') =>
