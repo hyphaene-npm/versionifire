@@ -13,12 +13,20 @@ const {
 	MINOR,
 	VERSION,
 	HELP,
-	DEFAULT
+	DEFAULT,
+	PACKAGE_FULL_PATH
 } = require('./constants');
 
 const { printVersion, printHelp, increase } = require('./utils');
 
-const { getIsGitInitialized, initGit, add, commit, pushToCurrentBranch } = require('./utils/git');
+const {
+	getIsGitInitialized,
+	initGit,
+	add,
+	commit,
+	pushToCurrentBranch,
+	runPublish
+} = require('./utils/git');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -26,13 +34,13 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 
 	if (err) {
 		console.log(err);
-		process.exit(1);
+		return;
 	} else if (args.length > 1 || !arg) {
 		console.log(WRONG_ARGS_NUMBER);
-		process.exit(1);
+		return;
 	} else if (!ACCEPTED_ARGS.includes(arg)) {
 		console.log(UNAVAILABLE_COMMAND);
-		process.exit(1);
+		return;
 	} else {
 		const package = JSON.parse(data); //now it an object
 		const { version, versionifier } = package;
@@ -43,7 +51,9 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			commitIfOnlyPackageJsonInStage,
 			commitIfMultipleFilesInStage,
 			push,
-			commitMessage
+			commitMessage,
+			remoteRepo,
+			publish
 		} =
 			versionifier || DEFAULT;
 
@@ -72,7 +82,6 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		const updatedVersion = [major, minor, patch].join('.');
 
 		const isGitInitialized = await getIsGitInitialized();
-		console.log({ isGitInitialized });
 		if (!isGitInitialized) {
 			await initGit();
 		}
@@ -85,17 +94,20 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			await commit(commitMessage, updatedVersion);
 		}
 		if (push) {
-			await pushToCurrentBranch();
+			await pushToCurrentBranch(remoteRepo);
 		}
 
 		if (needExit) {
-			process.exit(0);
+			return;
 		}
 		package.version = updatedVersion;
 		const json = JSON.stringify(package, null, 4);
-		console.log('Job is to be doooone :)');
+		fs.writeFileSync(PACKAGE_FULL_PATH, json, FORMAT);
+		console.log(`Job is doooone :), package is at version : ${updatedVersion}`);
 
-		fs.writeFileSync('package.json', json, 'utf8');
-		console.log('Job is doooone :)');
+		if (publish) {
+			await runPublish();
+		}
+		return;
 	}
 });
