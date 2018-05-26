@@ -37,6 +37,6 @@
 		"commitIfOnlyPackageJsonInStage": false,
 		"commitIfMultipleFilesInStage": false,
 		"push": false,
-		"commitMessage": "Update package.json to version @@ "
+		"commitMessage": "Update package.json to version @@"
 	}
 }
