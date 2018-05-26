@@ -16,7 +16,9 @@ const {
 	DEFAULT
 } = require('./constants');
 
-const { printVersion, printHelp, increase, getCommitMessage,oraPush, oraAdd, oraCommit, oraInit } = require('./utils');
+const { printVersion, printHelp, increase } = require('./utils');
+
+const { getIsGitInitialized, initGit, add, commit, pushToCurrentBranch } = require('./utils/git');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -38,36 +40,12 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		let [major, minor, patch] = version.split('.');
 
 		const {
-			commitIfOnlyPackageJsonInStage || commitIfMultipleFilesInStage),
+			commitIfOnlyPackageJsonInStage,
 			commitIfMultipleFilesInStage,
 			push,
 			commitMessage
 		} =
 			versionifier || DEFAULT;
-
-		const { stdout } = await execa.shell('git diff --name-only --cached');
-		console.log('result', typeof stdout, stdout, stdout.split('\n'));
-
-		if (
-			(stdout && commitIfMultipleFilesInStage) ||
-			(!stdout && (commitIfOnlyPackageJsonInStage || commitIfMultipleFilesInStage))
-		) {
-			const isGitInitialized = await execa.shell('git rev-parse --is-inside-git-dir');
-			if (!isGitInitialized) {
-				await execa.shell('git init');
-			}
-			await execa.shell('git add package.json');
-			await execa.shell(`git commit -m "${getCommitMessage(commitMessage, version)}"`);
-		}
-		if (push) {
-			await execa.shell('git push origin `git rev-parse --abbrev-ref HEAD`');
-		}
-
-		// si vide et commitSingle =>
-
-		// si pas vide mais commitMultiple
-
-		// si push => push
 
 		switch (arg) {
 		case PATCH:
@@ -91,15 +69,33 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			printHelp();
 			break;
 		}
+		const updatedVersion = [major, minor, patch].join('.');
+
+		const isGitInitialized = await getIsGitInitialized();
+		console.log({ isGitInitialized });
+		if (!isGitInitialized) {
+			await initGit();
+		}
+		const { stdout } = await execa.shell('git diff --name-only --cached');
+		if (
+			(stdout && commitIfMultipleFilesInStage) ||
+			(!stdout && (commitIfOnlyPackageJsonInStage || commitIfMultipleFilesInStage))
+		) {
+			await add();
+			await commit(commitMessage, updatedVersion);
+		}
+		if (push) {
+			await pushToCurrentBranch();
+		}
+
 		if (needExit) {
 			process.exit(0);
 		}
-
-		const updatedVersion = [major, minor, patch].join('.');
 		package.version = updatedVersion;
 		const json = JSON.stringify(package, null, 4);
-		fs.writeFile('package.json', json, 'utf8', () => {
-			console.log('Job is doooone :)');
-		});
+		console.log('Job is to be doooone :)');
+
+		fs.writeFileSync('package.json', json, 'utf8');
+		console.log('Job is doooone :)');
 	}
 });
