@@ -68,25 +68,20 @@ npm run up:patch
 
 for example
 
-[//]: # 'dans les settings js :"/.versionifierrc": "json"'
-
 ### Roadmap
 
-options :
+options : ( defaultValues)
 
-*   commitWhenOnlyFileInStage: false
-*   commitWhenOnlyFileInStage: false
+*   commitIfOnlyPackageJsonInStage: false
+*   commitIfMultipleFilesInStage: false
 *   commitMessage: 'update version package to $VERSION'
 *   push : false
-
-v1:
-
-*   [ ] just handles the <"cwd">/package.json
-*   [ ] handle git commands through .versionifierrc
+*   remoteRepo: 'origin'
+*   publish : false
 
 v2:
 
-*   [ ] use a prepublishOnly script
+*   [ ] use as a prepublishOnly script ? ( with inquirer ? like used package.json settings? if no, all questions are asked (depending on previous answer if actions are connected ))
 
 Out of scopes :
 
