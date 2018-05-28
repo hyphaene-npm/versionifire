@@ -1,31 +1,15 @@
 const execa = require('execa');
 const ora = require('ora');
-const fs = require('fs');
-const path = require('path');
-const { getCommitMessage } = require('./index');
-//
-const getSpinner = text => ({ text, color: 'red' });
-//
-const getIsGitInitialized = () => {
-	const gitPath = path.join(process.cwd(), '.git');
-	try {
-		fs.readdirSync(gitPath);
-		return true;
-	} catch (e) {
-		return false;
-	}
-};
-//
+const { PACKAGE_FULL_PATH } = require('../constants');
+const { getCommitMessage, getSpinner } = require('./index');
+
 const initGit = async () => execa.shell('git init');
 
 const commit = async (commitMessage, version) => {
 	execa.shell(`git commit -m "${getCommitMessage(commitMessage, version)}"`);
 };
 const add = async () => {
-	execa.shell('git add ./package.json');
-};
-const publish = async () => {
-	execa.shell('npm publish');
+	execa.shell(`git add ${PACKAGE_FULL_PATH}`);
 };
 
 const pushToCurrentBranch = async (remoteRepo = 'origin') =>
@@ -54,17 +38,10 @@ const oraPush = async remoteRepo => {
 	ora.promise(promise, getSpinner(`pushing on ${remoteRepo}`));
 	await promise;
 };
-const oraPublish = async () => {
-	const promise = publish();
-	ora.promise(promise, getSpinner(`running npm publish`));
-	await promise;
-};
 
 module.exports = {
-	getIsGitInitialized,
 	initGit: oraInit,
 	add: oraAdd,
 	commit: oraCommit,
-	pushToCurrentBranch: oraPush,
-	runPublish: oraPublish
+	pushToCurrentBranch: oraPush
 };
