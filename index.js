@@ -14,19 +14,13 @@ const {
 	VERSION,
 	HELP,
 	DEFAULT,
-	PACKAGE_FULL_PATH
+	PACKAGE_FULL_PATH,
+	GIT_FULL_PATH
 } = require('./constants');
 
 const { printVersion, printHelp, increase } = require('./utils');
-
-const {
-	getIsGitInitialized,
-	initGit,
-	add,
-	commit,
-	pushToCurrentBranch,
-	runPublish
-} = require('./utils/git');
+const { initGit, add, commit, pushToCurrentBranch } = require('./utils/git');
+const { runPublish } = require('./utils/npm');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -83,8 +77,8 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		package.version = updatedVersion;
 		const json = JSON.stringify(package, null, 4);
 		fs.writeFileSync(PACKAGE_FULL_PATH, json, FORMAT);
-		const isGitInitialized = await getIsGitInitialized();
-		if (!isGitInitialized) {
+
+		if (!fs.existsSync(GIT_FULL_PATH)) {
 			await initGit();
 		}
 		const { stdout } = await execa.shell('git diff --name-only --cached');
@@ -102,7 +96,9 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		if (publish) {
 			await runPublish();
 		}
-		console.log(`Job is doooone :), package is at version : ${updatedVersion}`);
+		setTimeout(() => {
+			console.log(`Job is doooone :), package is at version : ${updatedVersion}`);
+		}, 124);
 		return;
 	}
 });
