@@ -2,13 +2,12 @@ const path = require('path');
 
 const ACCEPTED_ARGS = ['patch', 'minor', 'help', 'major', 'version'];
 
-const WRONG_ARGS_NUMBER = `This CLI accepts only one arg. please run :
+const getHelp = prefix => `${prefix}
     $ versionifier help
 to see the available commands`;
 
-const UNAVAILABLE_COMMAND = `command not available
-    $ versionifier help
-to see the available commands`;
+const WRONG_ARGS_NUMBER = getHelp(`This CLI accepts only one arg. please run :`);
+const UNAVAILABLE_COMMAND = getHelp(`command not available :`);
 
 const VERSION_COMMAND = `
 $ versionifier version ( will ouput the cli version)
@@ -26,7 +25,9 @@ const AVAILABLE_COMMANDS = [PATCH, MINOR, MAJOR]
 	.reduce((acc, current) => acc + `\n${current}\n`, VERSION_COMMAND);
 
 const PACKAGE_PATH = './package.json';
+const GIT_PATH = './.git';
 const PACKAGE_FULL_PATH = path.join(process.cwd(), PACKAGE_PATH);
+const GIT_FULL_PATH = path.join(process.cwd(), GIT_PATH);
 
 const DEFAULT = {
 	commitIfOnlyPackageJsonInStage: false,
@@ -36,6 +37,9 @@ const DEFAULT = {
 	remoteRepo: 'origin',
 	publish: false
 };
+
+const publishCmd = 'npm publish';
+const initCmd = 'npm init';
 
 module.exports = {
 	ACCEPTED_ARGS,
@@ -50,5 +54,8 @@ module.exports = {
 	HELP,
 	AVAILABLE_COMMANDS,
 	DEFAULT,
-	PACKAGE_FULL_PATH
+	PACKAGE_FULL_PATH,
+	GIT_FULL_PATH,
+	initCmd,
+	publishCmd
 };
