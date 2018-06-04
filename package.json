@@ -4,7 +4,12 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js",
+		"patch": "node index.js patch",
+		"minor": "node index.js minor",
+		"major": "node index.js major",
+		"help": "node index.js help",
+		"default": "node index.js default",
+		"version": "node index.js version",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"homepage": "https://github.com/hyphaene/versionifier#readme",
