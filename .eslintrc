@@ -13,6 +13,9 @@
 		"comma-dangle": 0,
 		"no-console": 1,
 		"no-process-exit": 0,
-		"prefer-const": "error"
+		"no-tabs": 0,
+		"prefer-const": "error",
+		"bject-curly-newline": 0,
+		"no-use-before-define": 2
 	}
 }
