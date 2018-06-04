@@ -68,8 +68,6 @@ npm run up:patch
 
 for example
 
-### Roadmap
-
 options : ( defaultValues)
 
 *   commitIfOnlyPackageJsonInStage: false
@@ -78,6 +76,15 @@ options : ( defaultValues)
 *   push : false
 *   remoteRepo: 'origin'
 *   publish : false
+
+### Roadmap
+
+v1 :
+
+*   [ ] handle no package.json
+*   [ ] handle override settings one by one
+*   [ ] add a command to write the default keys inside the package.json
+*   [ ] and add command to choose value for each if default value not chosen
 
 v2:
 
