@@ -1,13 +1,11 @@
 const path = require('path');
 
-const ACCEPTED_ARGS = ['patch', 'minor', 'help', 'major', 'version'];
-
 const getHelp = prefix => `${prefix}
-    $ versionifier help
+$ versionifier help
 to see the available commands`;
 
-const WRONG_ARGS_NUMBER = getHelp(`This CLI accepts only one arg. please run :`);
-const UNAVAILABLE_COMMAND = getHelp(`command not available :`);
+const WRONG_ARGS_NUMBER = getHelp('This CLI accepts only one arg. please run :');
+const UNAVAILABLE_COMMAND = getHelp('command not available :');
 
 const VERSION_COMMAND = `
 $ versionifier version ( will ouput the cli version)
@@ -20,10 +18,11 @@ const MAJOR = 'major';
 const VERSION = 'version';
 const HELP = 'help';
 const DEFAULT_OPTIONS = 'default';
+const ACCEPTED_ARGS = [PATCH, MINOR, HELP, MAJOR, VERSION, DEFAULT_OPTIONS];
 
 const AVAILABLE_COMMANDS = [PATCH, MINOR, MAJOR]
 	.map(x => `$ versionifier ${x} ( will update by increasing ${x} version)`)
-	.reduce((acc, current) => acc + `\n${current}\n`, VERSION_COMMAND);
+	.reduce((acc, current) => `${acc}\n${current}\n`, VERSION_COMMAND);
 
 const PACKAGE_PATH = './package.json';
 const GIT_PATH = './.git';
