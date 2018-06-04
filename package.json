@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"start": "node index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"homepage": "https://github.com/hyphaene/versionifier#readme",
@@ -26,6 +27,7 @@
 	"dependencies": {
 		"execa": "^0.10.0",
 		"fs": "^0.0.1-security",
+		"inquirer": "^6.0.0",
 		"ora": "^2.1.0",
 		"path": "^0.12.7"
 	},

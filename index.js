@@ -22,6 +22,7 @@ const {
 const { printVersion, printHelp, increase } = require('./utils');
 const { initGit, add, commit, pushToCurrentBranch } = require('./utils/git');
 const { runPublish } = require('./utils/npm');
+const writeDefaultOptions = require('./utils/writeDefaultOptions');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -37,8 +38,8 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		console.log(UNAVAILABLE_COMMAND);
 		return;
 	} else {
-		const package = JSON.parse(data); //now it an object
-		const { version, versionifier } = package;
+		const pkg = JSON.parse(data); // now it an object
+		const { version, versionifier } = pkg;
 		let needExit = false;
 		let [major, minor, patch] = version.split('.');
 
@@ -70,13 +71,19 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			needExit = true;
 			printHelp();
 			break;
+		case DEFAULT_OPTIONS:
+			needExit = true;
+			writeDefaultOptions(pkg);
+			break;
+		default:
+			break;
 		}
 		if (needExit) {
 			return;
 		}
 		const updatedVersion = [major, minor, patch].join('.');
-		package.version = updatedVersion;
-		const json = JSON.stringify(package, null, 4);
+		pkg.version = updatedVersion;
+		const json = JSON.stringify(pkg, null, 4);
 		fs.writeFileSync(PACKAGE_FULL_PATH, json, FORMAT);
 
 		if (!fs.existsSync(GIT_FULL_PATH)) {
@@ -100,6 +107,5 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		setTimeout(() => {
 			console.log(`Job is doooone :), package is at version : ${updatedVersion}`);
 		}, 124);
-		return;
 	}
 });
