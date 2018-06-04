@@ -19,6 +19,7 @@ const MINOR = 'minor';
 const MAJOR = 'major';
 const VERSION = 'version';
 const HELP = 'help';
+const DEFAULT_OPTIONS = 'default';
 
 const AVAILABLE_COMMANDS = [PATCH, MINOR, MAJOR]
 	.map(x => `$ versionifier ${x} ( will update by increasing ${x} version)`)
@@ -52,6 +53,7 @@ module.exports = {
 	MAJOR,
 	VERSION,
 	HELP,
+	DEFAULT_OPTIONS,
 	AVAILABLE_COMMANDS,
 	DEFAULT,
 	PACKAGE_FULL_PATH,
