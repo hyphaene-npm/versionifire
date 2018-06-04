@@ -1,58 +1,58 @@
 {
-	"name": "versionifier",
-	"version": "1.1.1",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"patch": "node index.js patch",
-		"minor": "node index.js minor",
-		"major": "node index.js major",
-		"help": "node index.js help",
-		"default": "node index.js default",
-		"version": "node index.js version",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"homepage": "https://github.com/hyphaene/versionifier#readme",
-	"bugs": {
-		"url": "https://github.com/hyphaene/versionifier/issues"
-	},
-	"bin": {
-		"versionifier": "index.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/hyphaene/versionifier.git"
-	},
-	"author": "Maximilien Garenne <maximilien.garenne@gmail.com>",
-	"license": "MIT",
-	"devDependencies": {
-		"eslint": "^4.19.1",
-		"eslint-plugin-prettier": "^2.6.0"
-	},
-	"dependencies": {
-		"execa": "^0.10.0",
-		"fs": "^0.0.1-security",
-		"inquirer": "^6.0.0",
-		"ora": "^2.1.0",
-		"path": "^0.12.7"
-	},
-	"engines": {
-		"node": ">=8.0.0"
-	},
-	"keywords": [
-		"npm",
-		"package version",
-		"update",
-		"git",
-		"commit",
-		"push"
-	],
-	"versionifier": {
-		"commitIfOnlyPackageJsonInStage": true,
-		"commitIfMultipleFilesInStage": true,
-		"push": true,
-		"commitMessage": "Update package.json to version @@",
-		"publish": true,
-		"remoteRepo": "origin"
-	}
+    "name": "versionifier",
+    "version": "1.2.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "patch": "node index.js patch",
+        "minor": "node index.js minor",
+        "major": "node index.js major",
+        "help": "node index.js help",
+        "default": "node index.js default",
+        "version": "node index.js version",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "homepage": "https://github.com/hyphaene/versionifier#readme",
+    "bugs": {
+        "url": "https://github.com/hyphaene/versionifier/issues"
+    },
+    "bin": {
+        "versionifier": "index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hyphaene/versionifier.git"
+    },
+    "author": "Maximilien Garenne <maximilien.garenne@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "eslint": "^4.19.1",
+        "eslint-plugin-prettier": "^2.6.0"
+    },
+    "dependencies": {
+        "execa": "^0.10.0",
+        "fs": "^0.0.1-security",
+        "inquirer": "^6.0.0",
+        "ora": "^2.1.0",
+        "path": "^0.12.7"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "keywords": [
+        "npm",
+        "package version",
+        "update",
+        "git",
+        "commit",
+        "push"
+    ],
+    "versionifier": {
+        "commitIfOnlyPackageJsonInStage": true,
+        "commitIfMultipleFilesInStage": true,
+        "push": true,
+        "commitMessage": "Update package.json to version @@",
+        "publish": true,
+        "remoteRepo": "origin"
+    }
 }
