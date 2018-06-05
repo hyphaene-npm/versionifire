@@ -51,8 +51,6 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		const { commitMessage } = versionifier || DEFAULT;
 		const { remoteRepo } = versionifier || DEFAULT;
 		const { publish } = versionifier || DEFAULT;
-		console.log('========');
-		console.log(arg, ADD_SCRIPTS, arg === ADD_SCRIPTS);
 
 		switch (arg) {
 		case PATCH:
