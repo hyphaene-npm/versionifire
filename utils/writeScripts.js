@@ -3,10 +3,8 @@ const inquirer = require('inquirer');
 const { SCRIPTS, FORMAT, PACKAGE_FULL_PATH } = require('../constants');
 
 const writeDefaultOptions = async pkg => {
-	console.log('hey');
 	let canSetScripts = true;
 	if (pkg.scripts.patch || pkg.scripts.minor || pkg.scripts.major) {
-		console.log({ pkg });
 		const { override } = await inquirer.prompt([
 			{
 				name: 'override',
