@@ -25,13 +25,13 @@ npm install -g versionifier
 ### locally
 
 ```bash
-yarn add -D versionifier
+yarn add versionifier
 ```
 
 or
 
 ```bash
-npm install --save-dev versionifier
+npm install --save versionifier
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ $ versionifier help # output the available commands
 $ versionifier default # add the default options in the package.json
 $ versionifier patch # increase by 1 the patch version of your current package.json
 $ versionifier minor # increase by 1 the minor version of your current package.json
-$ versionifier major # increase by 1 the major version of your current package.json
+$ versionifier major # add scripts package.json
 ```
 
 Here are some scripts you can add inside the package.json :
@@ -82,26 +82,6 @@ options : ( defaultValues)
 
 v1 :
 
--   [ ] handle no package.json
 -   [ ] handle override settings one by one
--   [ ] add a command to write the default keys inside the package.json
--   [ ] and add command to choose value for each if default value not chosen
-
-v2:
-
--   [ ] use as a prepublishOnly script ? ( with inquirer ? like used package.json settings? if no, all questions are asked (depending on previous answer if actions are connected ))
-
-Out of scopes :
-
--   [ ] check if code works on node 4,5,6 etc
--   [ ] handle compatibility
-
-## Ressources
-
--   https://blog.risingstack.com/mastering-the-node-js-cli-command-line-options/
--   https://stackoverflow.com/questions/12941083/get-the-output-of-a-shell-command-in-node-js
-
-### command-line-args
-
--   https://www.npmjs.com/package/command-line-args
--   https://github.com/Polymer/polymer-cli/
+-   [x] add a command to write the default keys inside the package.json
+    -   [ ] and add command to choose value for each if default value not chosen
