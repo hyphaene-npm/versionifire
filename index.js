@@ -16,13 +16,15 @@ const {
 	DEFAULT_OPTIONS,
 	DEFAULT,
 	PACKAGE_FULL_PATH,
-	GIT_FULL_PATH
+	GIT_FULL_PATH,
+	ADD_SCRIPTS
 } = require('./constants');
 
 const { printVersion, printHelp, increase } = require('./utils');
 const { initGit, add, commit, pushToCurrentBranch } = require('./utils/git');
 const { runPublish } = require('./utils/npm');
 const writeDefaultOptions = require('./utils/writeDefaultOptions');
+const writeScripts = require('./utils/writeScripts');
 
 fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 	const args = process.argv.slice(2);
@@ -49,6 +51,8 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 		const { commitMessage } = versionifier || DEFAULT;
 		const { remoteRepo } = versionifier || DEFAULT;
 		const { publish } = versionifier || DEFAULT;
+		console.log('========');
+		console.log(arg, ADD_SCRIPTS, arg === ADD_SCRIPTS);
 
 		switch (arg) {
 		case PATCH:
@@ -73,7 +77,11 @@ fs.readFile(PACKAGE_PATH, FORMAT, async (err, data) => {
 			break;
 		case DEFAULT_OPTIONS:
 			needExit = true;
-			writeDefaultOptions(pkg);
+			await writeDefaultOptions(pkg);
+			break;
+		case ADD_SCRIPTS:
+			await writeScripts(pkg);
+			needExit = true;
 			break;
 		default:
 			break;
