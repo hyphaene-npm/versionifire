@@ -2,9 +2,9 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const { SCRIPTS, FORMAT, PACKAGE_FULL_PATH } = require('../constants');
 
-const writeDefaultOptions = async pkg => {
+const writeScripts = async pkg => {
 	let canSetScripts = true;
-	if (pkg.scripts.patch || pkg.scripts.minor || pkg.scripts.major) {
+	if (pkg.scripts && (pkg.scripts.patch || pkg.scripts.minor || pkg.scripts.major)) {
 		const { override } = await inquirer.prompt([
 			{
 				name: 'override',
@@ -29,4 +29,4 @@ const writeDefaultOptions = async pkg => {
 	}
 };
 
-module.exports = writeDefaultOptions;
+module.exports = writeScripts;
