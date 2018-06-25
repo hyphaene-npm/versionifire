@@ -79,13 +79,15 @@ options : ( defaultValues)
 *   remoteRepo: 'origin'
 *   publish : false
 
+
+* [ ] replace arg by inquirer to select options
+
 v2:
 
 *   [ ] use as a prepublishOnly script ? ( with inquirer ? like used package.json settings? if no, all questions are asked (depending on previous answer if actions are connected ))
 
 Out of scopes :
 
-*   [ ] check if code works on node 4,5,6 etc
 *   [ ] handle compatibility
 
 ## Ressources
