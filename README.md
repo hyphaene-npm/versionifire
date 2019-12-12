@@ -1,5 +1,7 @@
 ## Goal
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/hyphaene-npm/versionifire.svg)](https://greenkeeper.io/)
+
 Hi there !
 Tired to manually update your package.json to increase your version number ?
 This CLI solves this issue.
